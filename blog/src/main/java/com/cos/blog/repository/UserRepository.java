@@ -16,6 +16,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	public User findByUsername(String username);
 	//findBy가 궁금하면 jpa Query methods를 검색하면 어떤종류가 있는지 알수있음
 	
-
+	
+	public User findByBoardId(int boardId);
 
 }

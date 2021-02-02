@@ -1,5 +1,9 @@
 package com.cos.blog.controller;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,12 +17,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.cos.blog.BoardService;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.SearchDTO;
+import com.cos.blog.repository.BoardRepository;
 
 @Controller
 public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private BoardRepository boardRepository;
 	
 	//페이징
 	@GetMapping("/board/boardList")
@@ -30,6 +38,15 @@ public class BoardController {
 		
 		Page<Board> boardList = boardService.selBoardList(search, pageable);
 //		System.out.println(boardList.getTotalPages());
+		
+		int userId = 1;
+		List<Board> boardList2 = boardRepository.findByUserId(userId);
+		System.out.println(boardList2.get(0).getUser().getUsername());
+//		SELECT sum(B.sale) as totalSale FROM userinfo A
+//		LEFT JOIN sales B
+//		on A.id =  B.userId
+//		where A.id = 1; 한번써보자 그냥
+		
 		
 		int endPage = boardList.getTotalPages()-1;
 		if(endPage <0) {
@@ -51,6 +68,33 @@ public class BoardController {
 	public String boardWriteProc(Board board) {
 			boardService.boardWriteProc(board);
 		return "/board/boardList";
+	}
+	
+	@GetMapping("/board/calender")
+	public String boardCalender() {
+		int[] monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31 , 30, 31};
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH); //0~11 리턴(1월이면 0임)
+		int date = cal.get(Calendar.DATE); //날짜
+		int dayOfWeek = cal.get(Calendar.YEAR); // 요일 1~7 리턴
+		cal.set(year, month, date);
+		Date sdate = cal.getTime();
+		System.out.println("day_of_week" + Calendar.DAY_OF_WEEK);
+		System.out.println(cal.getFirstDayOfWeek()); //첫쨋날
+		
+		
+		for(int i=0; i<(month-1); i++) {
+			//윤달 계산
+			if((year%4==0||year%100==0)&&(year%400 == 0)){
+				monthDays[1] = 29;
+			}else {
+				monthDays[1] = 28;
+			}
+		}
+		
+		
+		return "/board/calender";
 	}
 
 }

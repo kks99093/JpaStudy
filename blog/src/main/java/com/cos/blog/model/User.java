@@ -1,6 +1,8 @@
 package com.cos.blog.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -24,6 +28,9 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	
+	@OneToMany(mappedBy="user")
+	private List<Board> board = new ArrayList<Board>();
 	
 	@Enumerated(EnumType.STRING)
 	private RoleType role; // ROLE_USER, ROLE_ADMIN

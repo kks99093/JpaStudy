@@ -41,5 +41,9 @@ public class Board {
 //	
 	@CreationTimestamp // 현재시간
 	private Timestamp createDate;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 
 }
