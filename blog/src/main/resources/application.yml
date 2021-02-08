@@ -10,10 +10,11 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/security?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: root
     password: wlsgml093!
     
+   
   mvc:
     view:
       prefix: /WEB-INF/views/
@@ -21,8 +22,29 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update #create update none
-#     여기에 update랑 create적는것의 차이가 뭐지?
+      ddl-auto: update 
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+    
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 927346597125-lg5beufjfe64g7imob5tovfmomo8m82l.apps.googleusercontent.com
+            client-secret: hy6q22uterCX7VTr18WcngTf
+            scrope:
+            - email
+            - profile
+            
+          facebook:
+            client-id: 473820503644777
+            client-secret: 4ba894074a1d7bf505fc37ea61e3aaae
+            scrope:
+            - email
+            - public_profile
+    
+    
+
+    

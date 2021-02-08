@@ -63,7 +63,7 @@ public class PrincipalDetails implements UserDetails{
 		return user.getUsername();
 	}
 	
-	public RoleType getRole() {
+	public String getRole() {
 		return user.getRole();
 	}
 

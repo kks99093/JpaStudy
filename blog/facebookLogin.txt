@@ -1,0 +1,27 @@
+google aip 콘솔 - 프로젝트 만듬 - Oauth 동의 화면(외부체크) 만들기 - 이름적고 저장 - 사용자 인증정보 - 사용자인증정보 만들기 - oauth클라이언트 id만들기 - 어플리케이션유형(웹 애플리케이션)
+- 이름적음 - 승인된 리디렉션URI에 http:/localhost:8080/login/oauth2/code/google (/oauth2/code/google는 마음대로 바꿀수있는게아님) -만들기
+클라이언트 ID랑 비밀번호 적어두기
+
+스타터프로젝트 만들떄 oauth2 client체크해서 의존성 가져오기(maven repository에서 찾기 힘듬)
+
+application yml
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 927346597125-lg5beufjfe64g7imob5tovfmomo8m82l.apps.googleusercontent.com
+            client-secret: hy6q22uterCX7VTr18WcngTf
+            scrope:
+            - email
+            - profile
+추가하기 (최상위가 spring)
+로그인에 oauth2/authorization/google 로 링크거는 a태그같은걸 만듬(저 주소는 내가 마음대로 바꿀수있는게 아님)
+
+SecurityConfig
+.and()
+.oauth2Login()
+.loginPage("/login"); //구글 로그인이 완료된 뒤의 후처리가 필요함
+추가
+
+뒤는 src파일 참조

@@ -59,7 +59,7 @@ public class IndexController {
 	@PostMapping("/join") //얘가 Proc
 	public String join(User user) {
 		System.out.println(user);
-		user.setRole(RoleType.ROLE_USER); //접근권한만 설정해주고 나머지는 model에서 설정해뒀기때문에 알아서 다 들어감
+		user.setRole("ROLE_USER"); //접근권한만 설정해주고 나머지는 model에서 설정해뒀기때문에 알아서 다 들어감
 		//암호화
 		String rawPassword = user.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);

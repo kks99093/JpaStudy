@@ -15,10 +15,11 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Builder;
 import lombok.Data;
 
 
-
+@Builder
 @Entity
 @Data
 public class User {
@@ -29,11 +30,14 @@ public class User {
 	private String password;
 	private String email;
 	
+	private String provider;
+	
+	private String providerId;
+	
 	@OneToMany(mappedBy="user")
 	private List<Board> board = new ArrayList<Board>();
 	
-	@Enumerated(EnumType.STRING)
-	private RoleType role; // ROLE_USER, ROLE_ADMIN
+	private String role; // ROLE_USER, ROLE_ADMIN
 	
 	@CreationTimestamp
 	private Timestamp createDate; //java sql import
