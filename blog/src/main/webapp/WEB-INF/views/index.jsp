@@ -10,5 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<a href="/chat/chat">채팅가기</a>
 </body>
 </html>
