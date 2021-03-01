@@ -41,16 +41,16 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 		User userEntity = userRepository.findByUsername(username);
 		
 		if(userEntity == null) {
-			System.out.println("구글 로그인이 최초입니다");
-			userEntity = User.builder()
-					.username(username)
-					.password(password)
-					.email(email)
-					.role(role)
-					.provider(provider)
-					.providerId(providerId)
-					.build();
-				userRepository.save(userEntity);
+//			System.out.println("구글 로그인이 최초입니다");
+//			userEntity = User.builder()
+//					.username(username)
+//					.password(password)
+//					.email(email)
+//					.role(role)
+//					.provider(provider)
+//					.providerId(providerId)
+//					.build();
+//				userRepository.save(userEntity);
 		}else {
 			System.out.println("구글 로그인 이미 한적이 있습니다.");
 		}

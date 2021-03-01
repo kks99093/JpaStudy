@@ -9,8 +9,9 @@ import javax.persistence.Enumerated;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
+
+import lombok.Data;
 
 // 시큐리티가 /login 주소 요청이 오면 낚아채서 로그인을 진행시킴
 // 이때 로그인 진행이 완료가되면 session을 만들어서 넣어줌(Security ContextHolder)
@@ -25,6 +26,7 @@ import com.cos.blog.model.User;
 // 유저정보(UserDetails)를 만드는구간
 // implements UserDetails를 하면 PrincopalDetails를 Authentication에 담을수 있게됨
 // 어노테이션 안적는 이유 : 나중에 New로 강제로 띄울거
+@Data
 public class PrincipalDetails implements UserDetails{
 	
 	private User user; //콤포지션(우리의 유저정보는 User객체가 갖고있으니까)

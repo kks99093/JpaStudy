@@ -18,5 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	
 	public User findByBoardId(int boardId);
+	
+	User findByProviderAndProviderId(String provider, String providerId);
 
 }

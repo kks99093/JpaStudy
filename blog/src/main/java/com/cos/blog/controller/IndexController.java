@@ -5,14 +5,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cos.blog.model.RoleType;
+import com.cos.blog.auth.PrincipalDetails;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 
@@ -26,7 +26,9 @@ public class IndexController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@GetMapping({"","/"})
-	public String index(Authentication authentication, HttpSession hs) {
+	public String index(@AuthenticationPrincipal PrincipalDetails principalDetails, HttpSession hs) {
+		System.out.println(principalDetails.getUser().getProvider()+", "+ principalDetails.getUser().getProviderId());
+		
 		// 머스테치 기본폴더 : src/main/resources/
 		// 뷰리졸버 설정 : templates(prefix), /mustache(sufix)
 		// 머스테치 의존성 추가했을시 뷰리졸버설정 생략 가능
